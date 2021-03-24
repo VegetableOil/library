@@ -1,5 +1,5 @@
 $big-font: 22px;
-$medium-font: 20px;
+$medium-font: 18px;
 $small-font: 16px;
 $dark-gray: rgb(28, 28, 28);
 $border-radius: 6px;
@@ -42,7 +42,7 @@ body {
         padding: $padding-small * 0.5;
         border: $border;
         outline: none;
-        font-weight: lighter;
+        font-weight: 400;
         width: 100%;
     }
 
@@ -71,7 +71,7 @@ body {
 
         #read-label {
             font-size: $small-font;
-            font-weight: lighter;
+            font-weight: 400;
         }
     }
 

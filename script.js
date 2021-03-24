@@ -9,6 +9,7 @@ let x;
 
 let myLibrary = [];
 let removeButtons = [];
+let checkers = [];
 
 
 
@@ -35,7 +36,7 @@ function Book(title, author, read) {
 
 function addBook() {
     addBookBtn.onclick = function(){
-        if (!titleInput.value && !authorInput.value) {
+        if ((!titleInput.value && !authorInput.value) || (!titleInput.value && authorInput.value) || (titleInput.value && !authorInput.value)) {
             alert('ye dumb cunt');
         } else {
             let newBook = new Book();
@@ -43,7 +44,6 @@ function addBook() {
             newBook.author = authorInput.value;
             newBook.read = readInput.checked;
             myLibrary.push(newBook);
-            console.log(newBook.read);
 
             titleInput.value = '';
             authorInput.value = '';
@@ -88,6 +88,8 @@ function removeFun() {
             }
         }
     });
+
+    console.log(checkers);
 }
 
 
@@ -96,7 +98,19 @@ function removeFun() {
 
 
 
-
+function editReadStatus() {
+    checkers.forEach(checker => {
+        checker.addEventListener('click', () => {
+            if (checkers.clicked = true) {
+                myLibrary[checkers.indexOf(checker)].read = true;
+                console.log(myLibrary);
+            } else {
+                myLibrary[checkers.indexOf(checker)].read = false;
+                console.log(myLibrary);
+            }
+        });
+    });
+}
 
 
 
@@ -129,6 +143,8 @@ function addToMain(i) {
         let newCheck = document.createElement('input');
         newCheck.type = 'checkbox';
         newCheck.setAttribute('id', 'read-input');
+        newCheck.classList.add(`check-${i}`);
+        checkers.push(newCheck);
         if (myLibrary[i].read) {
             newCheck.checked = 'true';
         }
@@ -171,3 +187,4 @@ function addToMain(i) {
 
 
 addBook();
+editReadStatus();
