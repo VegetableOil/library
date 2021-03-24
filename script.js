@@ -1,52 +1,173 @@
-let bookName = document.querySelector('[data-bookname]');
-let authorName = document.querySelector('[data-authorname]');
-let haveReadBtn = document.querySelector('[data-haveread]');
-let addBookBtn = document.querySelector('[data-add]');
 let main = document.getElementById('main');
+let bookInputDiv = document.querySelector('book-input');
+let titleInput = document.getElementById('book-name-input');
+let authorInput = document.getElementById('book-author-input');
+let readInput = document.getElementById('read-input');
+let addBookBtn = document.getElementById('add-book');
+let clicked = false;
+let x;
 
-let allBooks = [];
-let allBookCards = [];
+let myLibrary = [];
+let removeButtons = [];
 
-function Book(title, author, haveRead) {
+
+
+
+
+
+
+
+function Book(title, author, read) {
     this.title = title;
     this.author = author;
-    this.haveRead = haveRead;
+    this.read = read;
 }
+
+
+
+
+
+
+
+
+
+
 
 function addBook() {
-    addBookBtn.addEventListener('click', () => {
-        let newBook = new Book(bookName.value, authorName.value, true);
-        allBooks.push(newBook);
+    addBookBtn.onclick = function(){
+        if (!titleInput.value && !authorInput.value) {
+            alert('ye dumb cunt');
+        } else {
+            let newBook = new Book();
+            newBook.title = titleInput.value;
+            newBook.author = authorInput.value;
+            newBook.read = readInput.checked;
+            myLibrary.push(newBook);
+            console.log(newBook.read);
 
-        let newCard = document.createElement('div');
-        let newTitle = document.createElement('h2');
-        let newAuthor = document.createElement('p');
-        let newReadBtn = document.createElement('button');
-        let newRemoveBtn = document.createElement('button');
-        let buttonsDiv = document.createElement('div');
+            titleInput.value = '';
+            authorInput.value = '';
+            readInput.checked = false;
 
-        newTitle.innerText = newBook.title;
-        newAuthor.innerText = newBook.author;
-        newReadBtn.innerText = `I've Read`;
-        newRemoveBtn.innerText = `Remove Book`;
+            if (myLibrary.length == 0) {
+                x = 0;
+            } else {
+                x = myLibrary.length - 1;
+            }
+        
+            addToMain(x);
+        }
+    }
+}
 
-        newCard.classList.add('card');
-        newReadBtn.classList.add('read');
-        newRemoveBtn.classList.add('remove');
-        buttonsDiv.setAttribute('id', 'buttons');
 
-        newCard.appendChild(newTitle);
-        newCard.appendChild(newAuthor);
-        buttonsDiv.appendChild(newReadBtn);
-        buttonsDiv.appendChild(newRemoveBtn);
-        newCard.appendChild(buttonsDiv);
 
-        main.appendChild(newCard);
-    });
 
-    newRemoveBtn.addEventListener('click', () => {
-        alert('banaana');
+
+
+
+
+
+
+
+
+
+function removeFun() {
+    let yourNans = document.querySelectorAll('button');
+    let nanas = Array.from(yourNans);
+    nanas.shift();
+    nanas.forEach(mam => {
+        if (mam.innerText != 'Add Book') {
+            mam.onclick = () => {
+                myLibrary.splice(nanas.indexOf(mam), 1);
+                
+                while (main.children.length > 1) {
+                    main.removeChild(main.lastElementChild);
+                }
+                addToMain(x = 0);
+            }
+        }
     });
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function addToMain(i) {
+    for (i; i < myLibrary.length; i++) {
+        //create new book div
+        let newBookDiv = document.createElement('div');
+        newBookDiv.classList.add('book-input');
+
+        //create new checkbox div
+        let newCheckDiv = document.createElement('div');
+        newCheckDiv.classList.add('read-checkbox');
+
+        //create book title
+        let newTitleInput = document.createElement('h1');
+        newTitleInput.setAttribute('id', 'book-name-input');
+        newTitleInput.innerText = myLibrary[i].title;
+
+        //create book author
+        let newAuthorInput = document.createElement('h2');
+        newAuthorInput.setAttribute('id', 'book-author-input');
+        newAuthorInput.innerText = myLibrary[i].author;
+
+        //create checkbox
+        let newCheck = document.createElement('input');
+        newCheck.type = 'checkbox';
+        newCheck.setAttribute('id', 'read-input');
+        if (myLibrary[i].read) {
+            newCheck.checked = 'true';
+        }
+
+        //create checkbox label
+        let newLabel = document.createElement('label');
+        newLabel.setAttribute('id', 'read-label');
+        newLabel.innerText = 'Have Read';
+
+        //create button
+        let newButton = document.createElement('button');
+        newButton.innerText = 'Remove Book';
+        newButton.classList.add(`remove-${i}`);
+        removeButtons.push(newButton);
+
+        newBookDiv.appendChild(newTitleInput);
+        newBookDiv.appendChild(newAuthorInput);
+        newCheckDiv.appendChild(newCheck);
+        newCheckDiv.appendChild(newLabel);
+        newBookDiv.appendChild(newCheckDiv);
+        newBookDiv.appendChild(newButton);
+        main.appendChild(newBookDiv);
+
+        removeFun();
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 addBook();

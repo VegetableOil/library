@@ -6,130 +6,108 @@
   font-family: sans-serif;
 }
 
-:root {
-  font-size: 16px;
-}
-
 body {
-  height: 100vh;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
 }
 
-body #header {
-  position: fixed;
-  background-color: rgba(255, 255, 255, 0.75);
-  -webkit-backdrop-filter: blur(10px);
-          backdrop-filter: blur(10px);
-  top: 0;
-  left: 0;
+#main {
   width: 100%;
-  -webkit-box-shadow: 0 1px 3px 0 rgba(65, 65, 65, 0.5);
-          box-shadow: 0 1px 3px 0 rgba(65, 65, 65, 0.5);
-  text-align: center;
-  padding: 1rem;
-}
-
-body #main {
-  display: -ms-grid;
-  display: grid;
-  -ms-grid-columns: (300px)[4];
-      grid-template-columns: repeat(4, 300px);
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
-  width: 100%;
-  height: 100%;
-  padding: 6rem;
-  row-gap: 1rem;
-}
-
-body #main .card {
-  width: 90%;
   height: -webkit-fit-content;
   height: -moz-fit-content;
   height: fit-content;
-  padding: 1rem;
-  border-radius: 0.5rem;
-  background-color: #e4e4e4;
+  padding: 14px;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: (200px)[auto-fill];
+      grid-template-columns: repeat(auto-fill, 200px);
+  gap: 14px;
+  -webkit-column-gap: 14px;
+          column-gap: 14px;
 }
 
-body #main .card #buttons {
+.book-input {
+  padding: 14px;
+  border: 1px solid black;
   width: 100%;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 1fr;
+      grid-template-columns: 1fr;
+  -ms-grid-rows: (1fr)[4];
+      grid-template-rows: repeat(4, 1fr);
+  row-gap: 14px;
+}
+
+.book-input input[type=text], .book-input h1, .book-input h2 {
+  padding: 4px;
+  border: 1px solid black;
+  outline: none;
+  font-weight: lighter;
+  width: 100%;
+}
+
+.book-input input[type=text]::-webkit-input-placeholder {
+  color: #1c1c1c;
+}
+
+.book-input input[type=text]:-ms-input-placeholder {
+  color: #1c1c1c;
+}
+
+.book-input input[type=text]::-ms-input-placeholder {
+  color: #1c1c1c;
+}
+
+.book-input input[type=text]::placeholder {
+  color: #1c1c1c;
+}
+
+.book-input #book-name-input, .book-input h1 {
+  font-size: 22px;
+}
+
+.book-input #book-author-input, .book-input h2 {
+  font-size: 20px;
+}
+
+.book-input .read-checkbox {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
 }
 
-body #main .card #buttons button {
-  padding: 0.4rem 0;
-  font-size: 1.1rem;
-  width: 100%;
+.book-input .read-checkbox input[type=checkbox] {
+  cursor: pointer;
+  border: 1px solid black;
+  margin: auto 8px auto 0;
+}
+
+.book-input .read-checkbox #read-label {
+  font-size: 16px;
+  font-weight: lighter;
+}
+
+.book-input button {
+  font-size: 16px;
+  cursor: pointer;
+  border: 1px solid black;
+  background-color: white;
   outline: none;
 }
 
-body #main .card #buttons .read, body #main .card #buttons .add {
-  background-color: #b1ffb1;
-  color: #002400;
-  border: 1px solid green;
-  border-radius: 0.2rem;
+.book-input button[class^="remove-"]:hover {
+  background-color: #c96565;
 }
 
-body #main .card #buttons .remove {
-  background-color: #ffb1b1;
-  color: #240000;
-  border: 1px solid red;
-  border-radius: 0.2rem;
-}
-
-body #main .card input {
-  background-color: transparent;
-  border: none;
-  outline: none;
-}
-
-body #main .card .author-name {
-  font-size: 1rem;
-}
-
-body #main .card .book-name {
-  font-size: 1.5rem;
-  font-weight: bold;
-  margin-top: 0;
-}
-
-body #main .card h2, body #main .card p, body #main .card input {
-  -ms-grid-column: 1;
-  -ms-grid-column-span: 3;
-  grid-column: 1/4;
-}
-
-body #main .card h2 {
-  margin-top: 0;
-}
-
-body #main .card * {
-  margin-top: 0.4rem;
+.book-input button:hover {
+  background-color: lightgreen;
 }
 /*# sourceMappingURL=style.css.map */
